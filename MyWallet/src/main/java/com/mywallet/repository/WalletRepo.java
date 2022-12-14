@@ -1,5 +1,9 @@
 package com.mywallet.repository;
 
-public class WalletRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.mywallet.model.Wallet;
+
+public interface WalletRepo extends JpaRepository<Wallet, Integer>{
 
 }
