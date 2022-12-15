@@ -2,13 +2,17 @@ package com.mywallet.exceptions;
 
 public class BillPaymentException extends Exception{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public BillPaymentException() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public BillPaymentException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 	
 	

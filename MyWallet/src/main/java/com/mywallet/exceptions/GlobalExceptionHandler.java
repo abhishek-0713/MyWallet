@@ -9,80 +9,80 @@ import org.springframework.web.context.request.WebRequest;
 
 public class GlobalExceptionHandler {
 
+	/* --------------------------------------   BankAccount Exception    ----------------------------------------------*/
+	
 	@ExceptionHandler(BankAccountException.class)
-	public ResponseEntity<ErrorDetails> bankAccountException(BankAccountException bae,WebRequest req){
-		ErrorDetails ed=new ErrorDetails();
-		ed.setDiscription(req.getDescription(false));
-		ed.setMessage(bae.getMessage());
-		ed.setTimeStamp(LocalDateTime.now());
+	public ResponseEntity<ErrorDetails> mywalletExceptionHandler(BankAccountException bankAccountException,WebRequest request){
 		
-		return new ResponseEntity<ErrorDetails>(ed,HttpStatus.BAD_REQUEST);
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), bankAccountException.getMessage(), request.getDescription(false));
+
+		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.BAD_REQUEST);
 	}
 	
 	
+	/* --------------------------------------   Beneficiary Exception    ----------------------------------------------*/
+
 	@ExceptionHandler(BeneficiaryException.class)
-	public ResponseEntity<ErrorDetails> bankAccountException(BeneficiaryException bae,WebRequest req){
-		ErrorDetails ed=new ErrorDetails();
-		ed.setDiscription(req.getDescription(false));
-		ed.setMessage(bae.getMessage());
-		ed.setTimeStamp(LocalDateTime.now());
+	public ResponseEntity<ErrorDetails> mywalletExceptionHandler(BeneficiaryException beneficiaryException ,WebRequest request){
 		
-		return new ResponseEntity<ErrorDetails>(ed,HttpStatus.BAD_REQUEST);
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), beneficiaryException.getMessage(), request.getDescription(false));
+
+		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.BAD_REQUEST);
 	}
 	
 	
+	/* --------------------------------------   BillPayment Exception    ----------------------------------------------*/
+
 	@ExceptionHandler(BillPaymentException.class)
-	public ResponseEntity<ErrorDetails> bankAccountException(BillPaymentException bae,WebRequest req){
-		ErrorDetails ed=new ErrorDetails();
-		ed.setDiscription(req.getDescription(false));
-		ed.setMessage(bae.getMessage());
-		ed.setTimeStamp(LocalDateTime.now());
+	public ResponseEntity<ErrorDetails> mywalletExceptionHandler(BillPaymentException billPaymentException,WebRequest request){
 		
-		return new ResponseEntity<ErrorDetails>(ed,HttpStatus.BAD_REQUEST);
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), billPaymentException.getMessage(), request.getDescription(false));
+
+		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.BAD_REQUEST);
 	}
 	
 	
+	/* --------------------------------------   Customer Exception    ----------------------------------------------*/
+
 	@ExceptionHandler(CustomerException.class)
-	public ResponseEntity<ErrorDetails> bankAccountException(CustomerException bae,WebRequest req){
-		ErrorDetails ed=new ErrorDetails();
-		ed.setDiscription(req.getDescription(false));
-		ed.setMessage(bae.getMessage());
-		ed.setTimeStamp(LocalDateTime.now());
+	public ResponseEntity<ErrorDetails> mywalletExceptionHandler(CustomerException customerException,WebRequest request){
 		
-		return new ResponseEntity<ErrorDetails>(ed,HttpStatus.BAD_REQUEST);
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), customerException.getMessage(), request.getDescription(false));
+
+		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.BAD_REQUEST);
 	}
 	
+	/* --------------------------------------   BankAccount Exception    ----------------------------------------------*/
+
 	@ExceptionHandler(TransactionException.class)
-	public ResponseEntity<ErrorDetails> bankAccountException(TransactionException bae,WebRequest req){
-		ErrorDetails ed=new ErrorDetails();
-		ed.setDiscription(req.getDescription(false));
-		ed.setMessage(bae.getMessage());
-		ed.setTimeStamp(LocalDateTime.now());
+	public ResponseEntity<ErrorDetails> mywalletExceptionHandler(TransactionException transactionException,WebRequest request){
 		
-		return new ResponseEntity<ErrorDetails>(ed,HttpStatus.BAD_REQUEST);
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), transactionException.getMessage(), request.getDescription(false));
+
+		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.BAD_REQUEST);
 	}
 	
+	
+	/* --------------------------------------   Wallet Exception    ----------------------------------------------*/
+
 	@ExceptionHandler(WalletException.class)
-	public ResponseEntity<ErrorDetails> bankAccountException(WalletException bae,WebRequest req){
-		ErrorDetails ed=new ErrorDetails();
-		ed.setDiscription(req.getDescription(false));
-		ed.setMessage(bae.getMessage());
-		ed.setTimeStamp(LocalDateTime.now());
+	public ResponseEntity<ErrorDetails> mywalletExceptionHandler(WalletException walletException,WebRequest request){
 		
-		return new ResponseEntity<ErrorDetails>(ed,HttpStatus.BAD_REQUEST);
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), walletException.getMessage(), request.getDescription(false));
+
+		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.BAD_REQUEST);
 	}
 	
 	
+	/* --------------------------------------   Exception    ----------------------------------------------*/
+
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ErrorDetails> bankAccountException(Exception bae,WebRequest req){
-		ErrorDetails ed=new ErrorDetails();
-		ed.setDiscription(req.getDescription(false));
-		ed.setMessage(bae.getMessage());
-		ed.setTimeStamp(LocalDateTime.now());
+	public ResponseEntity<ErrorDetails> mywalletExceptionHandler(Exception exception,WebRequest request){
 		
-		return new ResponseEntity<ErrorDetails>(ed,HttpStatus.BAD_REQUEST);
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), exception.getMessage(), request.getDescription(false));
+
+		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.BAD_REQUEST);
 	}
-	
 	
 	
 }
