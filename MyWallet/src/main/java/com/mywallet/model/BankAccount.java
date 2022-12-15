@@ -20,6 +20,7 @@ public class BankAccount {
 	
 	@NotNull
 	private String BankName;
+	
 	@NotNull
 	private double Balance;
 	

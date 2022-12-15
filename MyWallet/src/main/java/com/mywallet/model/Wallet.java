@@ -15,7 +15,7 @@ public class Wallet {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer walletId;
 	
-	@Min(value = 500,message = "Min 500")
+	@Min(value = 500, message = "Wallet Required Rs.500 Minimum Balance")
 	private BigDecimal balance;
 	
 	@Override
@@ -43,7 +43,7 @@ public class Wallet {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Wallet(Integer walletId, @Min(value = 500, message = "Min 500") BigDecimal balance) {
+	public Wallet(Integer walletId, @Min(value = 500, message = "Wallet Required Rs.500 Minimum Balance") BigDecimal balance) {
 		super();
 		this.walletId = walletId;
 		this.balance = balance;

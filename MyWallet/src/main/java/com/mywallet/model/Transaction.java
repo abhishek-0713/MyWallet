@@ -15,7 +15,6 @@ public class Transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer transactionId;
-	
 	private String transactionType;
 	private LocalDate transactionDate;
 	private double amount;
