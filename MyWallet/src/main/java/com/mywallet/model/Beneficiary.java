@@ -4,7 +4,14 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Beneficiary {
 
 	@NotNull
