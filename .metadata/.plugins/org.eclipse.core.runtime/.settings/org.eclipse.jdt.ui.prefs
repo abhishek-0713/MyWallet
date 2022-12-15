@@ -1,6 +1,6 @@
 content_assist_completion_replacement_background=200,200,0
 content_assist_completion_replacement_foreground=200,0,0
-content_assist_favorite_static_members=org.assertj.core.api.Assertions.*;org.mockito.Matchers.*;org.mockito.Mockito.*;org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.*;org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.*;org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.*;org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.*;org.springframework.test.web.client.match.MockRestRequestMatchers.*;org.springframework.test.web.client.response.MockRestResponseCreators.*;org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;org.hamcrest.CoreMatchers.*;org.junit.Assert.*
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"/>
 content_assist_number_of_computers=15
 content_assist_parameters_background=52,57,61
 content_assist_parameters_foreground=238,238,238

@@ -1,14 +1,28 @@
 package com.mywallet.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Wallet {
 
 	@Id
@@ -18,34 +32,24 @@ public class Wallet {
 	@Min(value = 500, message = "Wallet Required Rs.500 Minimum Balance")
 	private BigDecimal balance;
 	
-	@Override
-	public String toString() {
-		return "Wallet [walletId=" + walletId + ", balance=" + balance + "]";
-	}
-
-	public Integer getWalletId() {
-		return walletId;
-	}
-
-	public void setWalletId(Integer walletId) {
-		this.walletId = walletId;
-	}
-
-	public BigDecimal getBalance() {
-		return balance;
-	}
-
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
-	}
-
-	public Wallet() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Wallet(Integer walletId, @Min(value = 500, message = "Wallet Required Rs.500 Minimum Balance") BigDecimal balance) {
-		super();
-		this.walletId = walletId;
-		this.balance = balance;
-	}
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
+	private Customer customer;
+	
+	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "wallet")
+	private List<Transaction> transactions = new ArrayList<>();
+	
+	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "wallet")
+	private List<BillPayment> billPayments = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "wallet")
+	private List<BankAccount> bankAccounts = new ArrayList<>();
+	
+	
+	
 }
