@@ -22,7 +22,7 @@ public class BankAccount {
 	private String BankName;
 	@NotNull
 	private double Balance;
-	
+	                                                                                                                             
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
 	
