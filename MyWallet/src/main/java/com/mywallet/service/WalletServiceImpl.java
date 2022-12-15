@@ -41,8 +41,14 @@ public class WalletServiceImpl implements WalletService {
 	/*---------------------------------   Create Wallet Account  -------------------------------------*/
 	@Override
 	public Customer createAccount(Customer customer) throws CustomerException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Wallet wallet = new Wallet();
+		wallet.setCustomer(customer);
+		
+		walletRepo.save(wallet);
+		
+		return customerRepo.save(customer);
+		
 	}
 
 	

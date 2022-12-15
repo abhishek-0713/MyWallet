@@ -1,6 +1,7 @@
 package com.mywallet.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,32 +24,57 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	/*---------------------------------   Add Beneficiary  -------------------------------------*/
 	@Override
 	public Beneficiary addBeneficiary(Beneficiary beneficiary) throws BeneficiaryException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return beneficiaryRepo.save(beneficiary);
+		
 	}
 
 	
-	/*---------------------------------   Delete Beneficiary  -------------------------------------*/
+//	/*---------------------------------   Delete Beneficiary  -------------------------------------*/
 	@Override
-	public Beneficiary deleteBeneficiary(Beneficiary beneficiary) throws BeneficiaryException {
-		// TODO Auto-generated method stub
-		return null;
+	public Beneficiary deleteBeneficiary(String name) throws BeneficiaryException {
+	
+		 Optional<Beneficiary> res= beneficiaryRepo.findByName(name);
+		 
+		 if (res.isPresent()) {
+
+				Beneficiary result = res.get();
+
+				beneficiaryRepo.delete(result);
+
+				return result;
+
+			} else {
+				
+				throw new BeneficiaryException("Name is not Present .. ");
+
+			}
+		
+		
 	}
 
 	
-	/*---------------------------------   View Beneficiary  -------------------------------------*/
+//	/*---------------------------------   View Beneficiary  -------------------------------------*/
 	@Override
 	public Beneficiary viewBeneficiary(String mobileNumber) throws BeneficiaryException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		 Optional<Beneficiary> res= beneficiaryRepo.findById(mobileNumber);
+		 
+		 if(res.isPresent()) {
+			 return res.get();
+		 }else {
+			 throw new BeneficiaryException("Number Not Found...");
+		 }
+		
 	}
 
 	
 	/*---------------------------------   View All Beneficiary  -------------------------------------*/
 	@Override
-	public List<Beneficiary> viewAllBeneficiary(Customer cutomer) throws BeneficiaryException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Beneficiary> viewAllBeneficiary() throws BeneficiaryException {
+		  
+		return beneficiaryRepo.findAll();
+		
 	}
 
 }
