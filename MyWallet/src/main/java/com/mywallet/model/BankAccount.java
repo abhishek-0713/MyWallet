@@ -30,7 +30,7 @@ public class BankAccount {
 	
 	@NotNull
 	private double Balance;
-	
+	                                                                                                                             
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
 	

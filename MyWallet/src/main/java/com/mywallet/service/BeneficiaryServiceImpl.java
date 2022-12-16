@@ -1,6 +1,7 @@
 package com.mywallet.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,33 +23,41 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	
 	/*---------------------------------   Add Beneficiary  -------------------------------------*/
 	@Override
+
 	public Beneficiary addBeneficiary(Beneficiary beneficiary, String key) throws BeneficiaryException {
 		// TODO Auto-generated method stub
 		return null;
-	}
+}
+
 
 	
-	/*---------------------------------   Delete Beneficiary  -------------------------------------*/
+//	/*---------------------------------   Delete Beneficiary  -------------------------------------*/
 	@Override
+
 	public Beneficiary deleteBeneficiary(Beneficiary beneficiary, String key) throws BeneficiaryException {
 		// TODO Auto-generated method stub
 		return null;
+
+
 	}
 
 	
-	/*---------------------------------   View Beneficiary  -------------------------------------*/
+//	/*---------------------------------   View Beneficiary  -------------------------------------*/
 	@Override
+
 	public Beneficiary viewBeneficiary(String mobileNumber, String key) throws BeneficiaryException {
 		// TODO Auto-generated method stub
 		return null;
+
 	}
 
 	
 	/*---------------------------------   View All Beneficiary  -------------------------------------*/
 	@Override
+
 	public List<Beneficiary> viewAllBeneficiary(Customer cutomer, String key) throws BeneficiaryException {
 		// TODO Auto-generated method stub
 		return null;
-	}
 
+}
 }
