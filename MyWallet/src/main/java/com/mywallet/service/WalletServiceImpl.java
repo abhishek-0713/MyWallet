@@ -55,6 +55,7 @@ public class WalletServiceImpl implements WalletService {
 	@Override
 	public Customer createAccount(Customer customer) throws CustomerException {
 
+
 		List<Customer> customers = customerRepo.findCustomerByMobile(customer.getMobileNumber());
 		
 		if(customers.isEmpty()) {
@@ -69,6 +70,9 @@ public class WalletServiceImpl implements WalletService {
 		}		
 		throw new CustomerException("This mobile number is already registered with EZWallet");
 	
+
+	
+		
 	}
 
 	
