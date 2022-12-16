@@ -6,7 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -26,7 +27,7 @@ public class Beneficiary {
 	private String mobile;
 	
 	@NotNull
-	@Size(min = 3,max = 15,message ="Enter Valid User Name" )
+	@Size(min = 3, max = 15,message ="Enter Valid User Name")
 	private String name;
 	
 
