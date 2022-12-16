@@ -11,16 +11,10 @@ public interface BeneficiaryService {
 	public Beneficiary addBeneficiary(Beneficiary beneficiary, String key) throws BeneficiaryException;
 
 	public Beneficiary deleteBeneficiary(Beneficiary beneficiary, String key) throws BeneficiaryException;
-
-	public Beneficiary deleteBeneficiary(String name) throws BeneficiaryException;
-
 	
 	public Beneficiary viewBeneficiary(String mobileNumber, String key) throws BeneficiaryException;
 	
-
 	public List<Beneficiary> viewAllBeneficiary(Customer cutomer, String key) throws BeneficiaryException;
-
-	public List<Beneficiary> viewAllBeneficiary() throws BeneficiaryException;
 
 	
 }
