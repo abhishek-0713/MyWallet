@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
@@ -29,27 +30,12 @@ public class Wallet {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer walletId;
 	
-	@Min(value = 500, message = "Wallet Required Rs.500 Minimum Balance")
 	private BigDecimal balance;
 	
-	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL)
+	
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "customerId")
 	private Customer customer;
-	
-	
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "wallet")
-	private List<Transaction> transactions = new ArrayList<>();
-	
-	
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "wallet")
-	private List<BillPayment> billPayments = new ArrayList<>();
-	
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "wallet")
-	private List<BankAccount> bankAccounts = new ArrayList<>();
-	
 	
 	
 }

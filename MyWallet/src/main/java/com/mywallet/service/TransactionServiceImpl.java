@@ -31,7 +31,7 @@ public class TransactionServiceImpl implements TransactionService {
 	
 	/*---------------------------------   View All Transaction  -------------------------------------*/
 	@Override
-	public Transaction viewAllTransaction(Wallet wallet) throws TransactionException {
+	public Transaction viewAllTransaction(Wallet wallet, String key) throws TransactionException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -39,7 +39,7 @@ public class TransactionServiceImpl implements TransactionService {
 	
 	/*---------------------------------   View Transaction By Date  -------------------------------------*/
 	@Override
-	public List<Transaction> viewTransactionsByDate(LocalDate localDate) throws TransactionException {
+	public List<Transaction> viewTransactionsByDate(LocalDate localDate, String key) throws TransactionException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -47,7 +47,7 @@ public class TransactionServiceImpl implements TransactionService {
 	
 	/*---------------------------------   View All Transaction By Date  -------------------------------------*/
 	@Override
-	public List<Transaction> viewAllTransactionByType(String transactionType) throws TransactionException {
+	public List<Transaction> viewAllTransactionByType(String transactionType, String key) throws TransactionException {
 		// TODO Auto-generated method stub
 		return null;
 	}

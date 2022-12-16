@@ -18,7 +18,7 @@ public class BillPaymentServiceImpl implements BillPaymentService{
 	
 	/*---------------------------------   Add BillPayment  -------------------------------------*/
 	@Override
-	public BillPayment addBillPayment(BillPayment billPayment) throws BillPaymentException {
+	public BillPayment addBillPayment(BillPayment billPayment, String key) throws BillPaymentException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -27,7 +27,7 @@ public class BillPaymentServiceImpl implements BillPaymentService{
 	/*---------------------------------   View BillPayment  -------------------------------------*/	
 	
 	@Override
-	public BillPayment viewBillPayment(BillPayment billPayment) throws BillPaymentException {
+	public BillPayment viewBillPayment(BillPayment billPayment, String key) throws BillPaymentException {
 		// TODO Auto-generated method stub
 		return null;
 	}

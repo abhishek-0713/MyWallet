@@ -23,7 +23,7 @@ public class AccountServiceImpl implements AccountService {
 	
 	/*---------------------------------   Add Customer Bank Account  -------------------------------------*/
 	@Override
-	public Wallet addAccount(BankAccount ba) throws WalletException {
+	public Wallet addAccount(BankAccount bankAccount, String key) throws WalletException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -31,7 +31,7 @@ public class AccountServiceImpl implements AccountService {
 	
 	/*---------------------------------   Remove Customer Bank Account  -------------------------------------*/
 	@Override
-	public Wallet removeAccount(Integer accno) throws BankAccountException {
+	public Wallet removeAccount(Integer accountNo, String key) throws BankAccountException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -39,7 +39,7 @@ public class AccountServiceImpl implements AccountService {
 	
 	/*---------------------------------   View Customer Bank Account  -------------------------------------*/
 	@Override
-	public BankAccount viewAccount(Wallet wallet) throws BankAccountException {
+	public BankAccount viewAccount(Wallet wallet, String key) throws BankAccountException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -47,7 +47,7 @@ public class AccountServiceImpl implements AccountService {
 	
 	/*---------------------------------   View All Customers Account  -------------------------------------*/
 	@Override
-	public List<BankAccount> viewAllAccount(Wallet wallet) throws BankAccountException {
+	public List<BankAccount> viewAllAccount(Wallet wallet, String key) throws BankAccountException {
 		// TODO Auto-generated method stub
 		return null;
 	}

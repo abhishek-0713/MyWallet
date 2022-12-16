@@ -23,58 +23,41 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	
 	/*---------------------------------   Add Beneficiary  -------------------------------------*/
 	@Override
-	public Beneficiary addBeneficiary(Beneficiary beneficiary) throws BeneficiaryException {
-		
-		return beneficiaryRepo.save(beneficiary);
-		
-	}
+
+	public Beneficiary addBeneficiary(Beneficiary beneficiary, String key) throws BeneficiaryException {
+		// TODO Auto-generated method stub
+		return null;
+}
+
 
 	
 //	/*---------------------------------   Delete Beneficiary  -------------------------------------*/
 	@Override
-	public Beneficiary deleteBeneficiary(String name) throws BeneficiaryException {
-	
-		 Optional<Beneficiary> res= beneficiaryRepo.findByName(name);
-		 
-		 if (res.isPresent()) {
 
-				Beneficiary result = res.get();
+	public Beneficiary deleteBeneficiary(Beneficiary beneficiary, String key) throws BeneficiaryException {
+		// TODO Auto-generated method stub
+		return null;
 
-				beneficiaryRepo.delete(result);
 
-				return result;
-
-			} else {
-				
-				throw new BeneficiaryException("Name is not Present .. ");
-
-			}
-		
-		
 	}
 
 	
 //	/*---------------------------------   View Beneficiary  -------------------------------------*/
 	@Override
-	public Beneficiary viewBeneficiary(String mobileNumber) throws BeneficiaryException {
-		
-		 Optional<Beneficiary> res= beneficiaryRepo.findById(mobileNumber);
-		 
-		 if(res.isPresent()) {
-			 return res.get();
-		 }else {
-			 throw new BeneficiaryException("Number Not Found...");
-		 }
-		
+
+	public Beneficiary viewBeneficiary(String mobileNumber, String key) throws BeneficiaryException {
+		// TODO Auto-generated method stub
+		return null;
+
 	}
 
 	
 	/*---------------------------------   View All Beneficiary  -------------------------------------*/
 	@Override
-	public List<Beneficiary> viewAllBeneficiary() throws BeneficiaryException {
-		  
-		return beneficiaryRepo.findAll();
-		
-	}
 
+	public List<Beneficiary> viewAllBeneficiary(Customer cutomer, String key) throws BeneficiaryException {
+		// TODO Auto-generated method stub
+		return null;
+
+}
 }
