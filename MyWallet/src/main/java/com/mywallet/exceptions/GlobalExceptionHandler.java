@@ -9,6 +9,15 @@ import org.springframework.web.context.request.WebRequest;
 
 public class GlobalExceptionHandler {
 
+	@ExceptionHandler(LoginException.class)
+	public ResponseEntity<ErrorDetails> ezwalletExceptionHandler(LoginException loginException,WebRequest request){
+		
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(), loginException.getMessage(), request.getDescription(false));
+		
+		return new ResponseEntity<ErrorDetails>(err, HttpStatus.NOT_FOUND);
+		
+	}
+	
 	/* --------------------------------------   BankAccount Exception    ----------------------------------------------*/
 	
 	@ExceptionHandler(BankAccountException.class)

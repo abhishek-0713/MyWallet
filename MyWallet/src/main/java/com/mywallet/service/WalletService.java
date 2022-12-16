@@ -15,17 +15,16 @@ public interface WalletService {
 
 	public Customer createAccount(Customer customer) throws CustomerException;
 	
-	public Customer showBalance(String mobile) throws CustomerException;
+	public Customer showBalance(String mobile, String key) throws CustomerException;
 	
-	public String fundTransfer(String srcMobileNumber,String targetMobileNumber, BigDecimal amount) throws WalletException,TransactionException;
+	public String fundTransfer(String srcMobileNumber,String targetMobileNumber, BigDecimal amount, String key) throws WalletException,TransactionException;
 	
-	public Customer depositAmount(BigDecimal amount,Integer accno) throws BankAccountException,WalletException;
+	public Customer depositAmount(BigDecimal amount,Integer accountNo, String key) throws BankAccountException,WalletException;
 	
-    public List<Customer> getList(Customer customer) throws CustomerException;
+    public List<Customer> getList(Customer customer, String key) throws CustomerException;
    
-    public Customer updateAccount(Integer accno,Customer customer) throws CustomerException;
+    public Customer updateAccount(Integer accno,Customer customer, String key) throws CustomerException;
     
-    public Customer addMoney(Wallet wallet, BigDecimal amount) throws WalletException,BankAccountException;
-    
-	
+    public Customer addMoney(Wallet wallet, BigDecimal amount, String key) throws WalletException,BankAccountException;
+    	
 }

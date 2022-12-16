@@ -10,12 +10,12 @@ import com.mywallet.model.Wallet;
 
 public interface AccountService {
 
-	public Wallet addAccount(BankAccount ba) throws WalletException;
+	public Wallet addAccount(BankAccount bankAccount, String key) throws WalletException;
 	
-	public Wallet removeAccount(Integer accno) throws BankAccountException;
+	public Wallet removeAccount(Integer accountNo, String key) throws BankAccountException;
 	
-	public BankAccount viewAccount(Wallet wallet) throws BankAccountException;
+	public BankAccount viewAccount(Wallet wallet, String key) throws BankAccountException;
 	
-	public List<BankAccount> viewAllAccount(Wallet wallet) throws BankAccountException;
+	public List<BankAccount> viewAllAccount(Wallet wallet, String key) throws BankAccountException;
 	
 }

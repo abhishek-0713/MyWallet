@@ -20,7 +20,7 @@ public class BankAccount {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer accNumber;
+	private Integer accountNumber;
 	
 	@NotNull
 	private String IFSCCode;

@@ -11,10 +11,10 @@ public interface TransactionService {
 
 	public Transaction addTransaction(Transaction transaction) throws TransactionException;
 	
-	public Transaction viewAllTransaction(Wallet wallet) throws TransactionException;
+	public Transaction viewAllTransaction(Wallet wallet, String key) throws TransactionException;
 	
-	public List<Transaction> viewTransactionsByDate(LocalDate localDate)throws TransactionException;
+	public List<Transaction> viewTransactionsByDate(LocalDate localDate, String key)throws TransactionException;
 	
-	public List<Transaction> viewAllTransactionByType(String transactionType) throws TransactionException;
+	public List<Transaction> viewAllTransactionByType(String transactionType, String key) throws TransactionException;
 	
 }

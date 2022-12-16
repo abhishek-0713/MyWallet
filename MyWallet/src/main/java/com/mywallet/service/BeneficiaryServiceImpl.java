@@ -22,7 +22,7 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	
 	/*---------------------------------   Add Beneficiary  -------------------------------------*/
 	@Override
-	public Beneficiary addBeneficiary(Beneficiary beneficiary) throws BeneficiaryException {
+	public Beneficiary addBeneficiary(Beneficiary beneficiary, String key) throws BeneficiaryException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -30,7 +30,7 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	
 	/*---------------------------------   Delete Beneficiary  -------------------------------------*/
 	@Override
-	public Beneficiary deleteBeneficiary(Beneficiary beneficiary) throws BeneficiaryException {
+	public Beneficiary deleteBeneficiary(Beneficiary beneficiary, String key) throws BeneficiaryException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -38,7 +38,7 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	
 	/*---------------------------------   View Beneficiary  -------------------------------------*/
 	@Override
-	public Beneficiary viewBeneficiary(String mobileNumber) throws BeneficiaryException {
+	public Beneficiary viewBeneficiary(String mobileNumber, String key) throws BeneficiaryException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -46,7 +46,7 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	
 	/*---------------------------------   View All Beneficiary  -------------------------------------*/
 	@Override
-	public List<Beneficiary> viewAllBeneficiary(Customer cutomer) throws BeneficiaryException {
+	public List<Beneficiary> viewAllBeneficiary(Customer cutomer, String key) throws BeneficiaryException {
 		// TODO Auto-generated method stub
 		return null;
 	}
