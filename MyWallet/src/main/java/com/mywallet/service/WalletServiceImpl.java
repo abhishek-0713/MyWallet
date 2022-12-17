@@ -68,11 +68,8 @@ public class WalletServiceImpl implements WalletService {
 			
 			return customerRepo.save(customer);
 		}		
-		throw new CustomerException("This mobile number is already registered with EZWallet");
+		throw new CustomerException("Mobile Number Already Linked To Another Account");
 	
-
-	
-		
 	}
 
 	

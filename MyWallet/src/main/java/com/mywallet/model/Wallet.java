@@ -29,13 +29,11 @@ public class Wallet {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer walletId;
-	
 	private BigDecimal balance;
-	
-	
+
+
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "customerId")
 	private Customer customer;
-	
 	
 }

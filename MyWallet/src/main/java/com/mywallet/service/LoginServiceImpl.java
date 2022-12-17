@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.mywallet.exceptions.LoginException;
 import com.mywallet.model.CurrentUserSession;
 import com.mywallet.model.Customer;
-import com.mywallet.model.LoginDTO;
+import com.mywallet.model.Login;
 import com.mywallet.repository.CurrentSessionRepo;
 import com.mywallet.repository.CustomerRepo;
 
@@ -30,7 +30,7 @@ public class LoginServiceImpl implements LoginService {
 	
 	/*-------------------------------------------   Login   --------------------------------------------------*/
 	@Override
-	public String CustomerLogin(LoginDTO logdto) throws LoginException {
+	public String CustomerLogin(Login logdto) throws LoginException {
 
 		List<Customer> customer= customerRepo.findCustomerByMobile(logdto.getMobileNumber());
 		

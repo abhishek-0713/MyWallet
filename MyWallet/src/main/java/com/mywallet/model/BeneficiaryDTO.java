@@ -1,0 +1,20 @@
+package com.mywallet.model;
+
+import lombok.Data;
+
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Data
+public class BeneficiaryDTO {
+
+    @NotNull
+    @Size(min = 10,message = "Enter Valid Mobile Number")
+    private String beneficiaryMobile;
+
+    @NotNull
+    @Size(min = 3, max = 15,message ="Enter Valid Beneficiary Name")
+    private String beneficiaryName;
+    
+}

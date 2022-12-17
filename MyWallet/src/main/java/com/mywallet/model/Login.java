@@ -10,12 +10,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginDTO {
-
+public class Login {
 
 	private String mobileNumber;
 
 	private String password;
 
-	
 }

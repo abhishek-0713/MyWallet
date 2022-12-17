@@ -23,13 +23,14 @@ public class Transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer transactionId;
-	private String transactionType;
-	private LocalDate transactionDate;
 	private double amount;
+	private String transactionType;
 	private String Description;
+	private LocalDate transactionDate;
+
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "walletId")
+//	@JoinColumn(name = "walletId", referencedColumnName = "walletId")
 	private Wallet wallet;
 	
 

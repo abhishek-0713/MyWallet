@@ -26,10 +26,10 @@ public class BillPayment {
 	private Integer billId;
 	private String billType;
 	private double amount;
-	private LocalDate paymentDatel;
+	private LocalDate paymentDate;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "walletId")
+//	@JoinColumn(name = "walletId", referencedColumnName = "walletId")
 	private Wallet wallet;
 	
 	

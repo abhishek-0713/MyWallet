@@ -21,17 +21,24 @@ public class BankAccount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer accountNumber;
-	
+	@NotNull
+	private String bankName;
 	@NotNull
 	private String IFSCCode;
-	
 	@NotNull
-	private String BankName;
-	
-	@NotNull
-	private double Balance;
+	private double balance;
 	                                                                                                                             
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Wallet wallet;
+
+	public BankAccount(Integer accountNumber, @NotNull String iFSCCode, @NotNull String bankName,
+			@NotNull double balance) {
+		super();
+		this.accountNumber = accountNumber;
+		IFSCCode = iFSCCode;
+		this.bankName = bankName;
+		this.balance = balance;
+	}
+
 	
 }

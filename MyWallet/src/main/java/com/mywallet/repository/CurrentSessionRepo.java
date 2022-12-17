@@ -12,7 +12,9 @@ import com.mywallet.model.CurrentUserSession;
 @Repository
 public interface CurrentSessionRepo extends JpaRepository<CurrentUserSession, Integer> {
 
-	public CurrentUserSession findByUuid(String uuid);
+    public CurrentUserSession findByKey(String Key);
+
+    public CurrentUserSession findByUuid(String uuid);
 
 	@Query("from CurrentUserSession c where c.userId=?1")
 	public Optional<CurrentUserSession> findByUserId(Integer userId);
