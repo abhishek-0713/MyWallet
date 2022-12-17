@@ -1,12 +1,15 @@
 package com.mywallet.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Email;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,5 +37,7 @@ public class Customer {
 	@Size(min = 6,max = 12,message = "Password should contains 6-12 characters")
 	private String password;
 	
-	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Wallet wallet;
 }

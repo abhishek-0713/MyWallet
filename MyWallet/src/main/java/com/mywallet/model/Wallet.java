@@ -12,9 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Min;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,9 +31,12 @@ public class Wallet {
 	private BigDecimal balance;
 	
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customerId")
 	private Customer customer;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "wallet")
+	private List<Transaction> transactions = new ArrayList<>();
 	
 	
 }
