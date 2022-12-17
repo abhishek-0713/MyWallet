@@ -11,6 +11,8 @@ import com.mywallet.exceptions.BankAccountException;
 import com.mywallet.exceptions.CustomerException;
 import com.mywallet.exceptions.TransactionException;
 import com.mywallet.exceptions.WalletException;
+import com.mywallet.model.BankAccount;
+import com.mywallet.model.CurrentUserSession;
 import com.mywallet.model.Customer;
 import com.mywallet.model.Wallet;
 import com.mywallet.repository.BankAccountRepo;
@@ -61,7 +63,7 @@ public class WalletServiceImpl implements WalletService {
 		if(customers.isEmpty()) {
 			
 			Wallet wallet = new Wallet();
-			wallet.setBalance(BigDecimal.valueOf(0));
+			wallet.setBalance(Double.valueOf(0));
 		
 			wallet.setCustomer(customer);
 			walletRepo.save(wallet);
@@ -78,8 +80,21 @@ public class WalletServiceImpl implements WalletService {
 	
 	/*---------------------------------   Show Wallet Balance  -------------------------------------*/
 	@Override
-	public Customer showBalance(String mobile, String key) throws CustomerException {
+	public Integer showBalance(Customer customer, String key) throws CustomerException {
+		
 		// TODO Auto-generated method stub
+		
+		CurrentUserSession validCustomer=user.findByUuid(key);
+		
+		if(validCustomer==null) {
+			throw new CustomerException("please provide a valid key to show your Account balanace");
+			
+		}
+		
+		if(customer.getCustomerId()==validCustomer.getUserId()) {
+			Customer c=new Customer();
+			
+		}
 		return null;
 	}
 
@@ -88,15 +103,41 @@ public class WalletServiceImpl implements WalletService {
 	public String fundTransfer(String srcMobileNumber, String targetMobileNumber, BigDecimal amount, String key)
 			throws WalletException, TransactionException {
 		// TODO Auto-generated method stub
+		
+		CurrentUserSession validCustomer=user.findByUuid(key);
+		
+		if(validCustomer==null) {
+			throw new TransactionException("please provide a valid key");
+		}
+		
+		
+		
 		return null;
 	}
 
 	
 	/*---------------------------------   Deposit Amount  -------------------------------------*/
 	@Override
-	public Customer depositAmount(BigDecimal amount, Integer accountNo, String key) throws BankAccountException, WalletException {
+	public BankAccount depositAmount(Double amount, Integer accountNo, String key) throws BankAccountException, WalletException {
 		// TODO Auto-generated method stub
-		return null;
+		CurrentUserSession validCustomer=user.findByUuid(key);
+		
+		BankAccount c=new BankAccount();
+		
+		if(validCustomer==null) {
+			throw new BankAccountException("please provide a valid key to deposit the amount");
+		}
+		
+		if(c.getAccountNumber()==validCustomer.getUserId()) {
+			BankAccount ba=bankAccountRepo.findById(accountNo).orElseThrow(()->new WalletException("Bank Account does not exist to deposit the amount"));
+			
+			ba.setBalance(ba.getBalance()+amount);
+			
+			return bankAccountRepo.save(ba);
+			
+		}else {
+			 throw new BankAccountException("not enough money to transfer");
+		}
 	}
 
 	
@@ -110,15 +151,27 @@ public class WalletServiceImpl implements WalletService {
 	
 	/*---------------------------------   Update Account  -------------------------------------*/
 	@Override
-	public Customer updateAccount(Integer accno, Customer customer, String key) throws CustomerException {
+	public Customer updateAccount(Customer customer, String key) throws CustomerException {
 		// TODO Auto-generated method stub
-		return null;
+		
+		CurrentUserSession validUser=currentSessionRepo.findByUuid(key);
+		
+		if(validUser==null) {
+			throw new CustomerException("Please provide a valid key to update customer account");
+		}
+		
+		if(customer.getCustomerId()==validUser.getUserId()) {
+			return customerRepo.save(customer);
+		}else {
+			throw new CustomerException("Invalid customer details, Please login first");
+		}
+		
 	}
 
 	
 	/*---------------------------------   Add Money To Wallet  -------------------------------------*/
 	@Override
-	public Customer addMoney(Wallet wallet, BigDecimal amount, String key) throws WalletException, BankAccountException {
+	public Customer addMoney(Wallet wallet, Double amount, String key) throws WalletException, BankAccountException {
 		// TODO Auto-generated method stub
 		return null;
 	}

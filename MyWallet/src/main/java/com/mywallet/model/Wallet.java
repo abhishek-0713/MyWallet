@@ -30,7 +30,7 @@ public class Wallet {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer walletId;
 	
-	private BigDecimal balance;
+	private Double balance;
 	
 	
 	@OneToOne(cascade = CascadeType.PERSIST)

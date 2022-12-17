@@ -58,7 +58,7 @@ public class GlobalExceptionHandler {
 		
 		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), customerException.getMessage(), request.getDescription(false));
 
-		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.NOT_FOUND);
 	}
 	
 	/* --------------------------------------   BankAccount Exception    ----------------------------------------------*/
@@ -90,7 +90,7 @@ public class GlobalExceptionHandler {
 		
 		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), exception.getMessage(), request.getDescription(false));
 
-		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	
