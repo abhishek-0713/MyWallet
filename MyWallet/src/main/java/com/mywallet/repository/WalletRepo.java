@@ -10,6 +10,6 @@ import com.mywallet.model.Wallet;
 @Repository
 public interface WalletRepo extends JpaRepository<Wallet, Integer>{
 
-	     @Override
-	    Optional<Wallet> findById(Integer integer);
+	  
+	 public Optional<Wallet> findByWalletId(Integer walletId);
 }

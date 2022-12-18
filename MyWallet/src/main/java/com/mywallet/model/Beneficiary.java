@@ -36,7 +36,7 @@ public class Beneficiary {
 	private List<Wallet> walletList = new ArrayList<>();
 
 	
-//	private Integer walletId;
+	private Integer walletId;
 	
 	
 }

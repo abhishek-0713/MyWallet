@@ -34,4 +34,6 @@ public class BankAccount {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
 	
+	private Integer walletId;
+	
 }

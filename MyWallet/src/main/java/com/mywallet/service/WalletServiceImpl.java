@@ -8,12 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mywallet.exceptions.BankAccountException;
+import com.mywallet.exceptions.BeneficiaryException;
 import com.mywallet.exceptions.CustomerException;
+import com.mywallet.exceptions.LoginException;
 import com.mywallet.exceptions.TransactionException;
 import com.mywallet.exceptions.WalletException;
 import com.mywallet.model.BankAccount;
+import com.mywallet.model.Beneficiary;
 import com.mywallet.model.CurrentUserSession;
 import com.mywallet.model.Customer;
+import com.mywallet.model.Transaction;
 import com.mywallet.model.Wallet;
 import com.mywallet.repository.BankAccountRepo;
 import com.mywallet.repository.BeneficiaryRepo;
@@ -58,7 +62,7 @@ public class WalletServiceImpl implements WalletService {
 	public Customer createAccount(Customer customer) throws CustomerException {
 
 
-		List<Customer> customers = customerRepo.findCustomerByMobile(customer.getMobileNumber());
+		Optional<Customer> customers = customerRepo.findByMobileNumber(customer.getMobileNumber());
 		
 		if(customers.isEmpty()) {
 			
@@ -80,27 +84,29 @@ public class WalletServiceImpl implements WalletService {
 	
 	/*---------------------------------   Show Wallet Balance  -------------------------------------*/
 	@Override
-	public Integer showBalance(Customer customer, String key) throws CustomerException {
+	public Double showBalance(String key) throws CustomerException {
 		
 		// TODO Auto-generated method stub
 		
-		CurrentUserSession validCustomer=user.findByUuid(key);
+		CurrentUserSession validcustomer=currentSessionRepo.findByUuid(key);
 		
-		if(validCustomer==null) {
-			throw new CustomerException("please provide a valid key to show your Account balanace");
+		if(validcustomer==null) {
+			throw new CustomerException("Please login first...");
+		}else {
+			Optional<Customer> c=customerRepo.findById(validcustomer.getUserId());
+			
+			Wallet wallet=c.get().getWallet();
+			
+			Double b=wallet.getBalance();
+			return b;
 			
 		}
 		
-		if(customer.getCustomerId()==validCustomer.getUserId()) {
-			Customer c=new Customer();
-			
-		}
-		return null;
 	}
 
 	/*---------------------------------   Fund Transfer  -------------------------------------*/
 	@Override
-	public String fundTransfer(String srcMobileNumber, String targetMobileNumber, BigDecimal amount, String key)
+	public Transaction fundTransfer(String srcMobileNumber, String targetMobileNumber, Double amount, String key)
 			throws WalletException, TransactionException {
 		// TODO Auto-generated method stub
 		
@@ -109,6 +115,13 @@ public class WalletServiceImpl implements WalletService {
 		if(validCustomer==null) {
 			throw new TransactionException("please provide a valid key");
 		}
+		
+		Optional<Customer> c=customerRepo.findByMobileNumber(srcMobileNumber);
+		
+		Customer customer=c.get();
+		Wallet wallet=customer.getWallet();
+		
+//		List<Beneficiary> beneficiary=wallet
 		
 		
 		
@@ -143,9 +156,30 @@ public class WalletServiceImpl implements WalletService {
 	
 	/*---------------------------------   View Customers List   -------------------------------------*/
 	@Override
-	public List<Customer> getList(Customer customer, String key) throws CustomerException {
+	public List<Beneficiary> getList(String key) throws BeneficiaryException,LoginException {
 		// TODO Auto-generated method stub
-		return null;
+		
+		CurrentUserSession validUser=currentSessionRepo.findByUuid(key);
+		
+		if(validUser==null) {
+			throw new LoginException("please provide a valid key");
+		}else {
+			
+			Optional<Customer> c=customerRepo.findById(validUser.getUserId());
+			
+			Customer customer=c.get();
+			Wallet wallet=customer.getWallet();
+			
+			List<Beneficiary> beneficiary=wallet.getBeneficiary();
+			
+			if(beneficiary==null) {
+				throw new BeneficiaryException("beneficiary is not added in your wallet..");
+			}
+			
+			return wallet.getBeneficiary();
+			
+		}
+		
 	}
 
 	
@@ -171,9 +205,36 @@ public class WalletServiceImpl implements WalletService {
 	
 	/*---------------------------------   Add Money To Wallet  -------------------------------------*/
 	@Override
-	public Customer addMoney(Wallet wallet, Double amount, String key) throws WalletException, BankAccountException {
+	public Customer addMoney(Double amount, String key) throws BankAccountException, LoginException{
 		// TODO Auto-generated method stub
-		return null;
+		
+		CurrentUserSession validUser=currentSessionRepo.findByUuid(key);
+		
+		if(validUser==null) {
+			throw new LoginException("please provide a valid key to addmoney..");
+		}
+		
+		Optional<Customer> c=customerRepo.findById(validUser.getUserId());
+		
+		Customer customer=c.get();
+		Wallet wallet=customer.getWallet();
+		
+		BankAccount ba=bankAccountRepo.findByWalletId(wallet.getWalletId());
+		
+		if(ba==null) {
+			throw new BankAccountException("Bank Account is not exist..");
+		}
+		
+		ba.setBalance(ba.getBalance()+amount);
+		
+		wallet.setBalance(wallet.getBalance()+amount);
+		
+		bankAccountRepo.save(ba);
+		walletRepo.save(wallet);
+		customerRepo.save(customer);
+		
+		
+		return customer;
 	}
 
 }

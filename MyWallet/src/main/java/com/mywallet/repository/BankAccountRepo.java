@@ -10,5 +10,5 @@ import com.mywallet.model.BankAccount;
 @Repository
 public interface BankAccountRepo extends JpaRepository<BankAccount, Integer> {
 
-	
+	public BankAccount findByWalletId(Integer walletId);
 }

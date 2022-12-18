@@ -12,7 +12,7 @@ import com.mywallet.model.Customer;
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, Integer> {
 	
-	@Query("from Customer c where c.mobileNumber=?1")
-	public List<Customer> findCustomerByMobile(String mobileNumber);	
+//	@Query("from Customer c where c.mobileNumber=?1")
+	public Optional<Customer> findByMobileNumber(String mobileNumber);	
 	
 }

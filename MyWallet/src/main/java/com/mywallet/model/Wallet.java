@@ -37,5 +37,7 @@ public class Wallet {
 	@JoinColumn(name = "customerId")
 	private Customer customer;
 	
-	
+	@OneToMany
+	@JsonIgnore
+	private List<Beneficiary> beneficiary;
 }

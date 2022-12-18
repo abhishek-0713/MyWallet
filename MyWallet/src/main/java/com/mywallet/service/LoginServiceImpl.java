@@ -32,9 +32,9 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public String CustomerLogin(LoginDTO logdto) throws LoginException {
 
-		List<Customer> customer= customerRepo.findCustomerByMobile(logdto.getMobileNumber());
+		Optional<Customer> customer= customerRepo.findByMobileNumber(logdto.getMobileNumber());
 		
-		Customer existingCustomer = customer.get(0);
+		Customer existingCustomer = customer.get();
 		
 		if(existingCustomer == null) {
 			throw new LoginException("Invalid MobileNumber!");
