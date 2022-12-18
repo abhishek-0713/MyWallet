@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
@@ -33,5 +32,13 @@ public class Transaction {
 //	@JoinColumn(name = "walletId", referencedColumnName = "walletId")
 	private Wallet wallet;
 	
+
+	public Transaction(LocalDate transactionDate, String transactionType, double amount, String description) {
+		super();
+		this.amount = amount;
+		this.transactionType = transactionType;
+		Description = description;
+		this.transactionDate = transactionDate;
+	}
 
 }

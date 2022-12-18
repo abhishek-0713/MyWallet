@@ -2,8 +2,6 @@ package com.mywallet.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
@@ -19,8 +17,8 @@ import lombok.NoArgsConstructor;
 public class BankAccount {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer accountNumber;
+	@NotNull
+	private Integer accountNo;
 	@NotNull
 	private String bankName;
 	@NotNull
@@ -34,7 +32,7 @@ public class BankAccount {
 	public BankAccount(Integer accountNumber, @NotNull String iFSCCode, @NotNull String bankName,
 			@NotNull double balance) {
 		super();
-		this.accountNumber = accountNumber;
+		this.accountNo = accountNumber;
 		IFSCCode = iFSCCode;
 		this.bankName = bankName;
 		this.balance = balance;

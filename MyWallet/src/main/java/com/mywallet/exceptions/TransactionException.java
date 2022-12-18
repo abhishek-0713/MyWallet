@@ -2,13 +2,18 @@ package com.mywallet.exceptions;
 
 public class TransactionException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public TransactionException() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public TransactionException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	

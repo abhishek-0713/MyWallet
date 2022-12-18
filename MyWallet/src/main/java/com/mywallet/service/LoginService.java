@@ -5,7 +5,7 @@ import com.mywallet.model.Login;
 
 public interface LoginService {
 	
-	   public String CustomerLogin(Login logdto) throws LoginException;
+	   public String CustomerLogin(Login login) throws LoginException;
 		
 	   public String CustomerLogout(String Key) throws LoginException;
 		

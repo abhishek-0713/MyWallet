@@ -1,9 +1,10 @@
 package com.mywallet.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -23,11 +24,11 @@ public class Beneficiary {
 	private String beneficiaryMobile;
 	
 	@NotNull
-	@Size(min = 3, max = 15,message ="Enter Valid Beneficiary Name")
+	@Size(min = 3, max = 20,message ="Enter Valid Beneficiary Name")
 	private String beneficiaryName;
 	
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "walletId",referencedColumnName = "walletId")
 	private Wallet wallet;
 

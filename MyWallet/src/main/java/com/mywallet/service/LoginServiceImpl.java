@@ -30,9 +30,9 @@ public class LoginServiceImpl implements LoginService {
 	
 	/*-------------------------------------------   Login   --------------------------------------------------*/
 	@Override
-	public String CustomerLogin(Login logdto) throws LoginException {
+	public String CustomerLogin(Login login) throws LoginException {
 
-		List<Customer> customer= customerRepo.findCustomerByMobile(logdto.getMobileNumber());
+		List<Customer> customer= customerRepo.findCustomerByMobile(login.getMobileNumber());
 		
 		Customer existingCustomer = customer.get(0);
 		
@@ -48,9 +48,9 @@ public class LoginServiceImpl implements LoginService {
 			
 		}
 		
-		if(existingCustomer.getPassword().equals(logdto.getPassword())) {
+		if(existingCustomer.getPassword().equals(login.getPassword())) {
 			
-			String key= RandomString.make(6);
+			String key = RandomString.make(6);
 			
 			CurrentUserSession currentUserSession = new CurrentUserSession(existingCustomer.getCustomerId(),key,LocalDateTime.now());
 			

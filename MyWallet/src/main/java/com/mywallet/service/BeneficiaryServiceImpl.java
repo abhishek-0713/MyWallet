@@ -3,18 +3,17 @@ package com.mywallet.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.mywallet.exceptions.CustomerException;
-import com.mywallet.model.CurrentUserSession;
-import com.mywallet.model.Wallet;
-import com.mywallet.repository.CurrentSessionRepo;
-import com.mywallet.repository.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mywallet.exceptions.BeneficiaryException;
+import com.mywallet.exceptions.CustomerException;
 import com.mywallet.model.Beneficiary;
-import com.mywallet.model.Customer;
+import com.mywallet.model.CurrentUserSession;
+import com.mywallet.model.Wallet;
+import com.mywallet.model.dto.BeneficiaryDTO;
 import com.mywallet.repository.BeneficiaryRepo;
+import com.mywallet.repository.CurrentSessionRepo;
 import com.mywallet.repository.WalletRepo;
 
 @Service
@@ -22,15 +21,15 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 
 	@Autowired
 	private WalletRepo walletRepo;
-
-	@Autowired
-	private CustomerRepo customerRepo;
 	
 	@Autowired
 	private BeneficiaryRepo beneficiaryRepo;
 
 	@Autowired
 	private CurrentSessionRepo currentSessionRepo;
+	
+//	@Autowired
+//	private CustomerRepo customerRepo;
 
 	
 	/*---------------------------------   Add Beneficiary  -------------------------------------*/
@@ -49,7 +48,7 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 
 //	/*---------------------------------   Delete Beneficiary  -------------------------------------*/
 	@Override
-	public Beneficiary deleteBeneficiary(Beneficiary beneficiary, String key) throws BeneficiaryException, CustomerException {
+	public Beneficiary deleteBeneficiary(BeneficiaryDTO beneficiaryDTO, String key) throws BeneficiaryException, CustomerException {
 
 		CurrentUserSession currentUserSession = currentSessionRepo.findByUuid(key);
 		if(currentUserSession == null) {
@@ -58,7 +57,7 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 
 		Wallet wallet = walletRepo.customerWalletDetailsByCId(currentUserSession.getUserId());
 
-		Beneficiary beneficiaries = beneficiaryRepo.findByMobWallet(wallet.getWalletId(),beneficiary.getBeneficiaryMobile());
+		Beneficiary beneficiaries = beneficiaryRepo.findByMobWallet(wallet.getWalletId(),beneficiaryDTO.getBeneficiaryMobile());
 
 		if(beneficiaries == null) {
 			throw new BeneficiaryException("No Beneficiary Registered Yet");
@@ -72,7 +71,7 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	
 //	/*---------------------------------   View Beneficiary  -------------------------------------*/
 	@Override
-	public Beneficiary viewBeneficiary(String mobileNumber, String key) throws BeneficiaryException, CustomerException {
+	public Beneficiary viewBeneficiary(String beneficiaryName, String key) throws BeneficiaryException, CustomerException {
 
 		CurrentUserSession currentUserSession = currentSessionRepo.findByUuid(key);
 		if(currentUserSession == null) {
@@ -81,7 +80,7 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 
 		Wallet wallet = walletRepo.customerWalletDetailsByCId(currentUserSession.getUserId());
 
-		Beneficiary beneficiaries = beneficiaryRepo.findByNameWallet(wallet.getWalletId(),mobileNumber);
+		Beneficiary beneficiaries = beneficiaryRepo.findByNameWallet(wallet.getWalletId(),beneficiaryName);
 
 		if(beneficiaries == null) {
 			throw new BeneficiaryException("No Beneficiary Registered Yet");
