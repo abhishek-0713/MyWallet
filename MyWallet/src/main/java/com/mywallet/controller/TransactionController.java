@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +27,8 @@ public class TransactionController {
 	private TransactionService transactionService;
 	
 	
+	/*-----------------------------------------------  Transaction between two date Mapping  ------------------------------------------------*/	
+
 	@GetMapping("/transaction/between/")
 	public ResponseEntity<List<TransactionDTO>> viewByTwoDate(@RequestParam String key, @RequestParam String start, @RequestParam  String end) throws TransactionException, CustomerException{
 		
@@ -44,17 +45,18 @@ public class TransactionController {
 
 			transactionDTOs.add(transactionDTO);	
 		}
-		return new ResponseEntity<List<TransactionDTO>>(transactionDTOs, HttpStatus.ACCEPTED);
+		return new ResponseEntity<List<TransactionDTO>>(transactionDTOs, HttpStatus.OK);
 	
 	}
 	
 	
 	
-	@PostMapping("/alltransactions")
+	/*----------------------------------------------- All Transaction Mapping  ------------------------------------------------*/	
+
+	@PostMapping("/transactions")
 	public ResponseEntity<List<TransactionDTO>> viewByWallet(@RequestParam String key) throws TransactionException, WalletException, CustomerException{
 		
 		List<Transaction> transactions = transactionService.viewAllTransaction();
-		
 
 		List<TransactionDTO> transactionDTOs = new ArrayList<>();
 		
@@ -70,13 +72,12 @@ public class TransactionController {
 	}
 	
 	
-	
-	
-	@GetMapping("/transactions/type/{type}")
-	public ResponseEntity<List<TransactionDTO>> viewAllTransacationByType(@RequestParam String key, @PathVariable("type") String type) throws TransactionException, CustomerException{
+	/*-----------------------------------------------  All Transactions By Type Mapping  ------------------------------------------------*/	
+
+	@GetMapping("/transactions/type")
+	public ResponseEntity<List<TransactionDTO>> viewAllTransacationByType(@RequestParam String key, @RequestParam String type) throws TransactionException, CustomerException{
 		
 		List<Transaction> transactions = transactionService.viewAllTransactionByType(type, key);
-		
 
 		List<TransactionDTO> transactionDTOs = new ArrayList<>();
 		
@@ -87,19 +88,19 @@ public class TransactionController {
 			transactionDTOs.add(transactionDTO);	
 		}
 		
-		return new ResponseEntity<List<TransactionDTO>>(transactionDTOs, HttpStatus.ACCEPTED);
+		return new ResponseEntity<List<TransactionDTO>>(transactionDTOs, HttpStatus.OK);
 	
 	}
 	
 	
+	/*-----------------------------------------------  Transactions By Date Mapping  ------------------------------------------------*/	
 
-	@GetMapping("/transactionbydate/{date}")
-	public ResponseEntity<List<TransactionDTO>> viewByDate(@RequestParam String key, @RequestParam("date") String date) throws TransactionException, CustomerException{
+	@GetMapping("/transactions/date")
+	public ResponseEntity<List<TransactionDTO>> viewByDate(@RequestParam String key, @RequestParam String date) throws TransactionException, CustomerException{
 		
 		LocalDate startDate = LocalDate.parse(date);
 		
-		List<Transaction> transactions =  transactionService.viewTransactionsByDate(startDate, startDate, key);
-		
+		List<Transaction> transactions =  transactionService.viewTransactionsByDate(startDate, startDate, key);	
 
 		List<TransactionDTO> transactionDTOs = new ArrayList<>();
 		
@@ -109,7 +110,7 @@ public class TransactionController {
 
 			transactionDTOs.add(transactionDTO);	
 		}
-		return new ResponseEntity<List<TransactionDTO>>(transactionDTOs, HttpStatus.ACCEPTED);
+		return new ResponseEntity<List<TransactionDTO>>(transactionDTOs, HttpStatus.OK);
 	}
 	
 }

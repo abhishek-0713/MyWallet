@@ -5,38 +5,44 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class BankAccount {
 
 	@Id
 	@NotNull
 	private Integer accountNo;
-	@NotNull
-	private String bankName;
+	
 	@NotNull
 	private String IFSCCode;
+	
 	@NotNull
-	private double balance;
-	                                                                                                                             
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	private String bankName;
+	
+	@NotNull
+	private Double balance;
+	
+	
+	@ManyToOne(cascade= CascadeType.PERSIST)
 	private Wallet wallet;
 
-	public BankAccount(Integer accountNumber, @NotNull String iFSCCode, @NotNull String bankName,
-			@NotNull double balance) {
+
+	public BankAccount(@NotNull Integer accountNo, @NotNull String iFSCCode,
+			@NotNull @Size(min = 4, max = 10, message = "Bank name not valid") String bankName,
+			@NotNull Double balance) {
 		super();
-		this.accountNo = accountNumber;
+		this.accountNo = accountNo;
 		IFSCCode = iFSCCode;
 		this.bankName = bankName;
 		this.balance = balance;
 	}
 
-	
 }

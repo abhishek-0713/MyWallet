@@ -29,6 +29,7 @@ public class LoginServiceImpl implements LoginService {
 
 	
 	/*-------------------------------------------   Login   --------------------------------------------------*/
+	
 	@Override
 	public String CustomerLogin(Login login) throws LoginException {
 
@@ -65,6 +66,7 @@ public class LoginServiceImpl implements LoginService {
 
 	
 	/*-------------------------------------   Logout   ----------------------------------------*/
+	
 	@Override
 	public String CustomerLogout(String Key) throws LoginException {
 

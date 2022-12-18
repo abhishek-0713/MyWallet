@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.mywallet.exceptions.BillPaymentException;
 import com.mywallet.exceptions.CustomerException;
+import com.mywallet.exceptions.LoginException;
 import com.mywallet.exceptions.TransactionException;
 import com.mywallet.exceptions.WalletException;
 import com.mywallet.model.BillPayment;
@@ -32,24 +33,23 @@ public class BillPaymentServiceImpl implements BillPaymentService{
 
 
 	/*---------------------------------   Add BillPayment  -------------------------------------*/
+	
 	@Override
-	public BillPayment addBillPayment(String key, int walletId, String recieverMobile, String Name, double amount,
-			String BillType, LocalDate paymentDate) throws BillPaymentException, CustomerException, WalletException, TransactionException {
-        
-        
-        BigDecimal amnt = BigDecimal.valueOf(amount);
-		
-        walletService.fundTransfer(Name, BillType, amnt, key);
+	public String addBillPayment(String targetMobile, String Name,double amount,String BillType,LocalDate paymentDate,int walletId,String key) throws BillPaymentException, WalletException, CustomerException, LoginException, TransactionException {
+		BigDecimal amnt = BigDecimal.valueOf(amount);
+		String str = walletService.fundTransfer(targetMobile, Name, amnt, key);
 		
 		BillPayment newbill = new BillPayment();
 		newbill.setAmount(amount);
 		newbill.setBillType(BillType);
 		newbill.setPaymentDate(LocalDate.now());
+		billPaymentRepo.save(newbill);
 		
+        return str;
+	
+	}	
 		
-        return billPaymentRepo.save(newbill);
-	}
-
+	
 	
 	/*---------------------------------   View BillPayment  -------------------------------------*/	
 	

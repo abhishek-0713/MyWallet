@@ -22,7 +22,7 @@ public class Customer {
 	private Integer customerId;
 
 	@NotNull
-	@Size(min = 3, max = 20, message = "Name Contains 3-20 Characters")
+	@Size(min = 3, max = 20, message = "Customer Name must Contains 3-20 Characters")
 	private String name;
 	
 	@NotNull

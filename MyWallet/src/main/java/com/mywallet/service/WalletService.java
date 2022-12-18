@@ -24,6 +24,6 @@ public interface WalletService {
 	
     public List<Customer> getList(Customer customer, String key) throws CustomerException;
        
-    public Customer addMoney(BigDecimal amount, Integer accountNumber, String key) throws WalletException,BankAccountException;
+    public String addMoney(Double amount, Integer accountNumber, String key) throws WalletException,BankAccountException, CustomerException, TransactionException;
     	
 }

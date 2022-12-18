@@ -9,7 +9,7 @@ import lombok.Data;
 public class BeneficiaryDTO {
 
 	@NotNull
-	@Size(min = 10,message = "Enter Valid Mobile Number")
+	@Size(min = 10,message = "Enter Valid beneficiaryMobile Number")
 	private String beneficiaryMobile;
 	
 	@NotNull

@@ -25,20 +25,30 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 public class BeneficiaryController {
 
     @Autowired
-    BeneficiaryService beneficiaryService;
+    private BeneficiaryService beneficiaryService;
 
-    @PostMapping("/addbeneficiary")
+    
+	/*----------------------------------------------- Add Beneficiary Mapping  ------------------------------------------------*/	
+
+    @PostMapping("/beneficiary")
     public ResponseEntity<Beneficiary> addBeneneficiary(@RequestBody Beneficiary beneficiary,  @RequestParam String key) throws BeneficiaryException {
         
-    	return new ResponseEntity<Beneficiary>(beneficiaryService.addBeneficiary(beneficiary,key), HttpStatus.ACCEPTED);
+    	return new ResponseEntity<Beneficiary>(beneficiaryService.addBeneficiary(beneficiary,key), HttpStatus.CREATED);
     }
 
 
-    @DeleteMapping("/beneficiaries")
+    
+	/*----------------------------------------------- Delete Beneficiaries Mapping  ------------------------------------------------*/	
+
+    @DeleteMapping("/beneficiary")
     public ResponseEntity<Beneficiary> deleteBeneneficiary(@Valid @RequestBody BeneficiaryDTO beneficiaryDTO , @RequestParam String key) throws BeneficiaryException, CustomerException, CustomerException {
         
     	return new ResponseEntity<Beneficiary>(beneficiaryService.deleteBeneficiary(beneficiaryDTO, key),HttpStatus.OK);
     }
+
+    
+    
+	/*----------------------------------------------- View All Beneficiaries Mapping  ------------------------------------------------*/	
 
     @GetMapping("/beneficiaries")
     public ResponseEntity<List<Beneficiary>> getAllBeneneficiary(@RequestParam String key) throws BeneficiaryException, CustomerException{

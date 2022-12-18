@@ -20,7 +20,7 @@ public class Beneficiary {
 
 	@Id
 	@NotNull
-	@Size(min = 10,message = "Enter Valid Mobile Number")
+	@Size(min = 10,message = "Enter Valid beneficiary Mobile Number")
 	private String beneficiaryMobile;
 	
 	@NotNull

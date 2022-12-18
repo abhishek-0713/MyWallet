@@ -10,58 +10,53 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mywallet.exceptions.BankAccountException;
 import com.mywallet.exceptions.CustomerException;
-import com.mywallet.exceptions.WalletException;
 import com.mywallet.model.BankAccount;
 import com.mywallet.model.Wallet;
 import com.mywallet.model.dto.BankAccountDTO;
 import com.mywallet.service.AccountService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 public class BankAccountController {
 	
 	@Autowired
-	private AccountService accountService;	
+	private AccountService accountService;
 	
+	/*------------------------------------------------ Add Bank Account Controller   ------------------------------------------------*/	
 	
-	@PostMapping("/addbankaccounts")
-	public ResponseEntity<String> addAccount(@RequestParam String key, @Valid @RequestBody BankAccountDTO bankAccountDTO) throws BankAccountException, CustomerException, WalletException{
+	@PostMapping("/bankaccounts")
+	public ResponseEntity<String> addAccount(@RequestParam String key, @Valid @RequestBody BankAccountDTO bankAccount) throws BankAccountException, CustomerException{
 		
-	    accountService.addAccount(bankAccountDTO, key);
+		accountService.addAccount(key,bankAccount);
 		
-		return new ResponseEntity<String>("Bank Account Added Successfully",HttpStatus.CREATED);
+		return new ResponseEntity<String>("Bank Account Added Successfully", HttpStatus.CREATED);
+		
 	}
 
-	
-	
-	@DeleteMapping("/deletebankaccounts")
-	public ResponseEntity<Wallet> removeAccount(@Valid @RequestBody BankAccountDTO bankAccountDTO, @RequestParam String key) throws BankAccountException, CustomerException{
-		
-		Wallet wallet = accountService.removeAccount(bankAccountDTO, key);
-		
-		return new ResponseEntity<Wallet>(wallet,HttpStatus.OK);
-	}
-	
+
+	/*----------------------------------------------- view All Bank Account Controller  ------------------------------------------------*/	
 
 	@GetMapping("/bankaccounts")
 	public ResponseEntity<List<BankAccount>> getAllBankAccount(@RequestParam String key) throws BankAccountException, CustomerException{
 		
-//		Wallet wallet = new Wallet();
-		
-		List<BankAccount> bankAccounts = accountService.viewAllAccount(key);
-		
-		return new ResponseEntity<List<BankAccount>>(bankAccounts, HttpStatus.FOUND);
+		return new ResponseEntity<List<BankAccount>>(accountService.viewAllAccount(key), HttpStatus.OK);
 		
 	}
+
+
+	/*----------------------------------------------- Delete Bank Account Controller   ------------------------------------------------*/	
+
+	@DeleteMapping("/bankaccounts")
+	public ResponseEntity<Wallet> removeAccount(@RequestParam String key, @Valid @RequestBody BankAccountDTO bankAccount) throws BankAccountException, CustomerException{
+		
+		return new ResponseEntity<Wallet>(accountService.removeAccount(key,bankAccount), HttpStatus.OK);
+	}
 	
-	
-	
-	
-	
+
 }

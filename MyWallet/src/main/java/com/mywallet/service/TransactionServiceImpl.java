@@ -29,7 +29,9 @@ public class TransactionServiceImpl implements TransactionService {
 	@Autowired
 	private CurrentSessionRepo currentSessionRepo;
 	
+	
 	/*---------------------------------   Add Transaction  -------------------------------------*/
+	
 	@Override
 	public Transaction addTransaction(Transaction transaction) throws TransactionException, WalletException {
 		
@@ -42,12 +44,13 @@ public class TransactionServiceImpl implements TransactionService {
 			}
 	     	throw new TransactionException("No Transaction data Found");
 		}
-		throw new WalletException("Invlid WalletId");
+		throw new WalletException("Invalid WalletId");
 		
 	}
 
 	
 	/*---------------------------------   View All Transaction  -------------------------------------*/
+	
 	@Override
 	public List<Transaction> viewAllTransaction() throws TransactionException {
 		
@@ -61,6 +64,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 	
 	/*---------------------------------   View Transaction By Date  -------------------------------------*/
+	
 	@Override
 	public List<Transaction> viewTransactionsByDate(LocalDate fromDate, LocalDate toDate, String key) throws TransactionException, CustomerException {
 		
@@ -82,13 +86,14 @@ public class TransactionServiceImpl implements TransactionService {
 		}
 		
 		
-		List<Transaction> listOfTransactions= transactionRepo.findByTransactionDateBetween(fromDate, toDate);
+		List<Transaction> transactions = transactionRepo.findByTransactionBetweenDate(fromDate, toDate);
 		
-		return listOfTransactions;
+		return transactions;
 	}
 
 	
 	/*---------------------------------   View All Transaction By Date  -------------------------------------*/
+	
 	@Override
 	public List<Transaction> viewAllTransactionByType(String transactionType, String key) throws TransactionException, CustomerException {
 		
@@ -104,8 +109,6 @@ public class TransactionServiceImpl implements TransactionService {
 		}
 		return transactions;
 	}
-
-
 
 
 }

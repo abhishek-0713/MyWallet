@@ -46,7 +46,8 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	}
 
 
-//	/*---------------------------------   Delete Beneficiary  -------------------------------------*/
+	/*---------------------------------   Delete Beneficiary  -------------------------------------*/
+	
 	@Override
 	public Beneficiary deleteBeneficiary(BeneficiaryDTO beneficiaryDTO, String key) throws BeneficiaryException, CustomerException {
 
@@ -57,7 +58,7 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 
 		Wallet wallet = walletRepo.customerWalletDetailsByCId(currentUserSession.getUserId());
 
-		Beneficiary beneficiaries = beneficiaryRepo.findByMobWallet(wallet.getWalletId(),beneficiaryDTO.getBeneficiaryMobile());
+		Beneficiary beneficiaries = beneficiaryRepo.findByMobileWallet(wallet.getWalletId(),beneficiaryDTO.getBeneficiaryMobile());
 
 		if(beneficiaries == null) {
 			throw new BeneficiaryException("No Beneficiary Registered Yet");
@@ -69,7 +70,8 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	}
 
 	
-//	/*---------------------------------   View Beneficiary  -------------------------------------*/
+	/*---------------------------------   View Beneficiary  -------------------------------------*/
+	
 	@Override
 	public Beneficiary viewBeneficiary(String beneficiaryName, String key) throws BeneficiaryException, CustomerException {
 
@@ -91,6 +93,7 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 
 	
 	/*---------------------------------   View All Beneficiary  -------------------------------------*/
+	
 	@Override
 	public List<Beneficiary> viewAllBeneficiary(String key) throws BeneficiaryException, CustomerException {
 
@@ -101,7 +104,7 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 
 		Wallet wallet = walletRepo.customerWalletDetailsByCId(currentUserSession.getUserId());
 
-		List<Beneficiary> beneficiaries = beneficiaryRepo.findByWallet(wallet.getWalletId());
+		List<Beneficiary> beneficiaries = beneficiaryRepo.findByWalletId(wallet.getWalletId());
 		if(beneficiaries.size() == 0) {
 			throw new BeneficiaryException("No Beneficiary Registered Yet");
 		}

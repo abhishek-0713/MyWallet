@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mywallet.exceptions.BillPaymentException;
 import com.mywallet.exceptions.CustomerException;
+import com.mywallet.exceptions.LoginException;
 import com.mywallet.exceptions.TransactionException;
 import com.mywallet.exceptions.WalletException;
-import com.mywallet.model.BillPayment;
 import com.mywallet.service.BillPaymentService;
+
 
 @RestController
 public class BillPaymentController {
@@ -23,12 +24,11 @@ public class BillPaymentController {
 	private BillPaymentService billPayService;
 	
 	@PostMapping("/addBillPayment")
-	public ResponseEntity<BillPayment> addBillPayment(@RequestParam("targetMobile") String targetMobile, @RequestParam("Name") String Name, @RequestParam("amount") double amount, @RequestParam("BillType") String BillType, @RequestParam("key") String key) throws BillPaymentException, WalletException, CustomerException, TransactionException {
+	public ResponseEntity<String> addBillPayment(@RequestParam("targetMobile") String targetMobile, @RequestParam("Name") String Name, @RequestParam("amount") double amount, @RequestParam("BillType") String BillType, @RequestParam("key") String key) throws BillPaymentException, WalletException, CustomerException, LoginException, TransactionException {
 		
 		LocalDate date=LocalDate.now();
+		String output = billPayService.addBillPayment(targetMobile, Name, amount, BillType, date, 0, key);
 		
-		BillPayment billPayment = billPayService.addBillPayment(key, 0, key, Name, amount, BillType, date);
-		
-		return new ResponseEntity<BillPayment>(billPayment, HttpStatus.OK);
+		return new ResponseEntity<String>(output,HttpStatus.OK);
 	}
 }

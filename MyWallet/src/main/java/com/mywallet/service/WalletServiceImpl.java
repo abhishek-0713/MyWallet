@@ -12,11 +12,13 @@ import com.mywallet.exceptions.BankAccountException;
 import com.mywallet.exceptions.CustomerException;
 import com.mywallet.exceptions.TransactionException;
 import com.mywallet.exceptions.WalletException;
+import com.mywallet.model.BankAccount;
 import com.mywallet.model.Beneficiary;
 import com.mywallet.model.CurrentUserSession;
 import com.mywallet.model.Customer;
 import com.mywallet.model.Transaction;
 import com.mywallet.model.Wallet;
+import com.mywallet.repository.BankAccountRepo;
 import com.mywallet.repository.BeneficiaryRepo;
 import com.mywallet.repository.CurrentSessionRepo;
 import com.mywallet.repository.CustomerRepo;
@@ -28,8 +30,8 @@ public class WalletServiceImpl implements WalletService {
 	@Autowired
 	private WalletRepo walletRepo;
 	
-//	@Autowired
-//	private BankAccountRepo bankAccountRepo;
+	@Autowired
+	private BankAccountRepo bankAccountRepo;
 	
 	@Autowired
 	private BeneficiaryRepo beneficiaryRepo;
@@ -53,7 +55,8 @@ public class WalletServiceImpl implements WalletService {
 	
 	
 	
-	/*---------------------------------   Create Wallet Account  -------------------------------------*/
+	/*---------------------------------   Create Account  -------------------------------------*/
+	
 	@Override
 	public Customer createAccount(Customer customer) throws CustomerException {
 
@@ -76,6 +79,7 @@ public class WalletServiceImpl implements WalletService {
 	
 	
 	/*---------------------------------   Update Account  -------------------------------------*/
+	
 	@Override
 	public Customer updateAccount(Customer customer, String key) throws CustomerException {		
 
@@ -99,6 +103,7 @@ public class WalletServiceImpl implements WalletService {
 
 	
 	/*---------------------------------   Show Wallet Balance  -------------------------------------*/
+	
 	@Override
 	public BigDecimal showBalance(String mobile, String key) throws CustomerException {
 		
@@ -116,7 +121,8 @@ public class WalletServiceImpl implements WalletService {
 		
 	}
 
-	/*---------------------------------   Fund Transfer  -------------------------------------*/
+	
+	/*---------------------------------   Fund Transfer To Mobile Number  -------------------------------------*/
 	@Override
 	public String fundTransfer(String name, String targetMobileNumber, BigDecimal amount, String key) throws WalletException, TransactionException, CustomerException {
 		
@@ -134,7 +140,7 @@ public class WalletServiceImpl implements WalletService {
 		
 		Beneficiary beneficiary = new Beneficiary(targetMobileNumber, name, wallet);
 		
-		List<Beneficiary> beneficiaries = beneficiaryRepo.findByWallet(wallet.getWalletId());
+		List<Beneficiary> beneficiaries = beneficiaryRepo.findByWalletId(wallet.getWalletId());
 		
 		if(!beneficiaries.contains(beneficiary)) {
 			beneficiaryRepo.save(beneficiary);
@@ -188,65 +194,63 @@ public class WalletServiceImpl implements WalletService {
 
 	
 	/*---------------------------------   Add Money To Wallet  -------------------------------------*/
+	
 	@Override
-	public Customer addMoney(BigDecimal amount, Integer accountNumber, String key) throws WalletException, BankAccountException {
-		return null;
+	public String addMoney(Double amount, Integer accountNumber, String key	) throws WalletException, BankAccountException, CustomerException, TransactionException {
+		
+		CurrentUserSession currentUserSession = currentSessionRepo.findByUuid(key);
+		
+		if(currentUserSession == null) {
+			throw new CustomerException("No Customer LoggedIn");		
+		}
+		
+		
 
-//		CurrentUserSession currentUserSession = currentSessionRepo.findByUuid(key);
-//		
-//		if(currentUserSession == null) {
-//			throw new CustomerException("No Customer LoggedIn");		
-//		}
-//		
-//		
-//		
-//		Integer userId = currentUserSession.getUserId();
-//		Wallet wallet = walletRepo.customerWalletDetailsByCId(userId);
-//		
-//		List<BankAccount> bankAccounts = bankAccountRepo.findAllByWalletId(wallet.getWalletId());
-//	
-//		if(bankAccounts.isEmpty()) {
-//			throw new BankAccountException("No Bank Account Linked To Wallet Yet");
-//		}
-//		
-//		
-//		
-//		
-//		BankAccount bankAccount = null;
-//		
-//		for(BankAccount b : bankAccounts) {
-//			
-//			if((b.getAccountNumber().toString()).equals(accountNumber.toString())) {
-//				bankAccount = b;
-//				break;
-//			}
-//			
-//		}
-//		
-//		if(bankAccount == null) {
-//			throw new BankAccountException("Invalid Bank Account Number");
-//		}
-//				
-//		if(bankAccount.getBalance() < amount.compareTo(amount)) {
-//			throw new BankAccountException("Insufficient balance For Transaction");
-//		}
-//		
-//		bankAccount.setBalance(bankAccount.getBalance() - amount.compareTo(amount));
-//		wallet.setBalance(wallet.getBalance().add(Bi.valueOf(amount)));
-//		
-//		bankRepo.save(acct);
-//		
-//		Transaction trans = new Transaction();
-//		trans.setTransactionType("Bank transfer");
-//		trans.setTransactionDate(LocalDate.now());
-//		trans.setAmount(amount);
-//		trans.setWallet(wallet);
-//		trans.setDescription("transferred from bank "+acct.getBankName()+" to wallet");
-//		
-//		transactionServe.addTransaction(trans);	
-//		
-//		
-//		return  accountNumber + " ";
+		Integer userId = currentUserSession.getUserId();
+		Wallet wallet = walletRepo.customerWalletDetailsByCId(userId);
+		
+		List<BankAccount> bankAccounts = bankAccountRepo.findAllByWalletId(wallet.getWalletId());
+
+		if(bankAccounts.isEmpty()) {
+			throw new BankAccountException("No Bank Account Linked To Wallet Yet");
+		}
+		
+		
+		
+		BankAccount bankAccount = null;
+		
+		for(BankAccount b : bankAccounts) {
+			
+			if((b.getAccountNo().toString()).equals(accountNumber.toString())) {
+				bankAccount = b;
+				break;
+			}
+			
+		}
+		
+		
+		
+		if(bankAccount == null) {
+			throw new BankAccountException("Invalid Bank Account Number");
+		}
+				
+		if(bankAccount.getBalance() < amount) {
+			throw new BankAccountException("Insufficient balance in Bank Account");
+		}
+		
+		bankAccount.setBalance(bankAccount.getBalance() - amount);
+		wallet.setBalance(wallet.getBalance().add(BigDecimal.valueOf(amount)));
+		
+		
+		bankAccountRepo.save(bankAccount);
+		
+		Transaction transaction = new Transaction(LocalDate.now(), "Bank transfer", amount, "transferred from bank "+bankAccount.getBankName()+" to wallet");
+		transaction.setWallet(wallet);
+		
+		transactionService.addTransaction(transaction);	
+		
+		
+		return  amount + "rs. Debited to your BankAccount To Account Number "+ accountNumber  ;
 	
 	}
 	

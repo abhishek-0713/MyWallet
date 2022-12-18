@@ -11,13 +11,13 @@ import com.mywallet.model.Beneficiary;
 @Repository
 public interface BeneficiaryRepo extends JpaRepository<Beneficiary, String>{
 
+	@Query(value = "from Beneficiary b INNER JOIN b.wallet w where w.walletId=?1")
+	public List<Beneficiary> findByWalletId(Integer walletId);
+	
 	@Query(value = "from Beneficiary b INNER JOIN b.wallet w where w.walletId=?1 AND b.beneficiaryName =?2")
 	public Beneficiary findByNameWallet(Integer walletId,String name);
 
 	@Query(value = "from Beneficiary b INNER JOIN b.wallet w where w.walletId=?1 AND b.beneficiaryMobile =?2")
-	public Beneficiary findByMobWallet(Integer walletId,String name);
-
-	@Query(value = "from Beneficiary b INNER JOIN b.wallet w where w.walletId=?1")
-	public List<Beneficiary> findByWallet(Integer walletId);
+	public Beneficiary findByMobileWallet(Integer walletId,String name);
 
 }

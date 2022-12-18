@@ -6,14 +6,18 @@ import lombok.Data;
 
 @Data
 public class BankAccountDTO {
-
+	
 	@NotNull
 	private Integer accountNo;
-	@NotNull
-	private String bankName;
+	
 	@NotNull
 	private String IFSCCode;
+	
 	@NotNull
-	private double balance;
-
+	private String bankName;
+	
+	@NotNull
+	private Double balance;
+	
+	
 }
