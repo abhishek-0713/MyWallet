@@ -12,16 +12,16 @@ This is restful service for the payment wallet application with all neccessary A
 #
 ### Team Members 
 
-- [Alok Shekhawat](https://github.com/aloks31) :  Added Beneficiary Service Layer implemtation. Establish relationship between Beneficiary entity and Customer entity.
+ - Alok Shekhawat  |  [Github](https://github.com/aloks31)   <!-- Added Beneficiary Service Layer implemtation. Establish relationship between Beneficiary entity and Customer entity. -->
 
--  [Dileep Kumar Yadav](https://github.com/dileep8920)  :  Responsible for creating the Wallet Module. Added Wallet Service Layer Implemetation.
+ - Dileep Kumar Yadav  |  [Github](https://github.com/dileep8920)  <!-- :  Responsible for creating the Wallet Module. Added Wallet Service Layer Implemetation. -->
 
-- [Graghavendramurty](https://github.com/GandhamRaghavendra)  :  Worked Transaction Service Layer Implementation and perform transaction related operations.
+ - Graghavendramurty |  [Github](https://github.com/GandhamRaghavendra)  <!-- :  Worked Transaction Service Layer Implementation and perform transaction related operations. -->
 
-- [Musavvir Shaikh](https://github.com/shaikh9560)  :  Created Bank Acccount Service Layer and implementation of account related services.
+ - Musavvir Shaikh  |  [Github](https://github.com/shaikh9560)  <!-- :  Created Bank Acccount Service Layer and implementation of account related services. -->
 </br>
 
-- [Abhishek D. Patil](https://github.com/abhishek-0713) :   Team Lead. Resplonsible for building overall working flow of application. Implemented User Service Layer, validate login service layer. Bug Fixes, Handling Console Errors, All Exceptions Handling.
+ - Abhishek D. Patil |  [Github](https://github.com/abhishek-0713) -   Team Lead <!-- Resplonsible for building overall working flow of application. Implemented User Service Layer, validate login service layer. Bug Fixes, Handling Console Errors, All Exceptions Handling. -->
 
                      
 
@@ -55,11 +55,47 @@ This is restful service for the payment wallet application with all neccessary A
 
 </br>
 
+## Tech Stack 
+
+- Advance Java
+
+- Spring Boot 
+
+- Spring Validation
+
+- MySQL
+
+- Maven
+
+- Swagger
+
+- Lombok
+
 ## ER Diagram : 
 
 ![Screenshot 2022-12-13 204808](https://user-images.githubusercontent.com/105943862/208492068-2bda95cc-33dd-4f7e-849d-3c1a7738e5c5.png)
 
 
-## Service Interface: 
+## Swagger UI :
 
-![Screenshot 2022-12-13 230502](https://user-images.githubusercontent.com/105943862/208456407-7a777063-ba42-46ed-a08e-c261dbdd3723.png)
+### server url
+`` http://localhost:8484/swagger-ui/index.html ``
+
+### Schema
+
+![image](https://user-images.githubusercontent.com/105943862/208501389-eb273f1a-38f0-4b7b-b522-8e8e75fa9d6d.png)
+
+<!-- ### Swagger Run
+
+![image](https://user-images.githubusercontent.com/105943862/208501739-22793eb1-f09a-439e-9f5f-4ea56bfe632c.png)
+
+![image](https://user-images.githubusercontent.com/105943862/208501763-11c2b3ee-d3d8-47bc-bffe-7d836a35697f.png)
+
+![image](https://user-images.githubusercontent.com/105943862/208501791-2ee582d9-c4b4-4863-b4e0-2e59d326ff29.png)
+
+ -->
+
+
+
+
+
