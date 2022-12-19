@@ -25,6 +25,38 @@ import com.mywallet.service.AccountService;
 @RestController
 public class BankAccountController {
 	
+	@Autowired
+	private AccountService accountService;
+	
+	/*------------------------------------------------ Add Bank Account Controller   ------------------------------------------------*/	
+	
+	@PostMapping("/bankaccounts")
+	public ResponseEntity<String> addAccount(@RequestParam String key, @Valid @RequestBody BankAccountDTO bankAccount) throws BankAccountException, CustomerException{
+		
+		accountService.addAccount(key,bankAccount);
+		
+		return new ResponseEntity<String>("Bank Account Added Successfully", HttpStatus.CREATED);
+		
+	}
+
+
+	/*----------------------------------------------- view All Bank Account Controller  ------------------------------------------------*/	
+
+	@GetMapping("/bankaccounts")
+	public ResponseEntity<List<BankAccount>> getAllBankAccount(@RequestParam String key) throws BankAccountException, CustomerException{
+		
+		return new ResponseEntity<List<BankAccount>>(accountService.viewAllAccount(key), HttpStatus.OK);
+		
+	}
+
+
+	/*----------------------------------------------- Delete Bank Account Controller   ------------------------------------------------*/	
+
+	@DeleteMapping("/bankaccounts")
+	public ResponseEntity<Wallet> removeAccount(@RequestParam String key, @Valid @RequestBody BankAccountDTO bankAccount) throws BankAccountException, CustomerException{
+		
+		return new ResponseEntity<Wallet>(accountService.removeAccount(key,bankAccount), HttpStatus.OK);
+	}
 	
 
 }

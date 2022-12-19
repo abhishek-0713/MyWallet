@@ -36,9 +36,30 @@ public class AccountServiceImpl implements AccountService{
 	/*--------------------------------------------     Add Bank Account    -----------------------------------------------*/
 	
 	@Override
-	public Wallet addAccount(String key,BankAccountDTO bankAccount)  throws BankAccountException,CustomerException{
-		return null;	
+	public Wallet addAccount(String key,BankAccountDTO bankAccount)  throws BankAccountException,CustomerException{	
         
+		CurrentUserSession currUserSession = currentSessionRepo.findByUuid(key);
+		
+        if(currUserSession==null) {
+    		throw new CustomerException("No Customer LoggedIn");
+		}
+		
+		Optional<BankAccount> optional = bankAccountRepo.findById(bankAccount.getAccountNo());
+	
+		
+		if(optional.isEmpty()){	
+			  
+			   Wallet wallet =  walletRepo.customerWalletDetailsByCId(currUserSession.getUserId());
+			  
+			  BankAccount createBankAccount = new BankAccount(bankAccount.getAccountNo(), bankAccount.getIFSCCode(), bankAccount.getBankName(), bankAccount.getBalance());
+			  createBankAccount.setWallet(wallet); 
+			   
+			  bankAccountRepo.save(createBankAccount);
+
+			  return wallet;
+		  }
+		 
+		throw new BankAccountException("Bank Account already exist With Given AccountNumber... Try Different");
 	
 	}
 	
@@ -47,7 +68,26 @@ public class AccountServiceImpl implements AccountService{
 	
 	@Override
 	public Wallet removeAccount(String key, BankAccountDTO bankAccountDTO) throws BankAccountException, CustomerException{
-		return null;
+
+		CurrentUserSession currUserSession = currentSessionRepo.findByUuid(key);
+		
+        if(currUserSession==null) {
+    		throw new CustomerException("No Customer LoggedIn");
+		}
+		
+		Optional<BankAccount> optional = bankAccountRepo.findById(bankAccountDTO.getAccountNo());
+		
+		if(optional.isPresent()) {
+			
+			bankAccountRepo.delete(optional.get());
+			
+			Wallet wallet = optional.get().getWallet();
+			
+			return wallet;
+
+		} 
+
+		throw new BankAccountException("No Bank Account exist");
 		
 	}
 
@@ -56,18 +96,46 @@ public class AccountServiceImpl implements AccountService{
 
 	@Override
 	public BankAccount viewAccount(String key) throws BankAccountException,CustomerException{
-		return null;
 		
- 	}
+ 
+		CurrentUserSession currUserSession = currentSessionRepo.findByUuid(key);
+		
+        if(currUserSession == null) {
+    		throw new CustomerException("No Customer LoggedIn");
+		}
+		
+		
+		BankAccount bankAccount= bankAccountRepo.findByWalletId(walletRepo.customerWalletDetailsByCId(currUserSession.getUserId()).getWalletId()).get(0);
+		
+		if(bankAccount == null) {
+			
+			throw new BankAccountException("No Bank Account exist");
+		}
+		
+		return bankAccount;
+	}
 
 	
 	/*--------------------------------------------     View Wallet All Bank Account    -----------------------------------------------*/
 
 	@Override
 	public List<BankAccount> viewAllAccount(String key) throws BankAccountException,CustomerException{
-		return null;
+		
+		CurrentUserSession currUserSession = currentSessionRepo.findByUuid(key);
+		
+        if(currUserSession == null) {
+    		throw new CustomerException("No Customer LoggedIn");
+		}
 		
 		
+		List<BankAccount> bankAccounts = bankAccountRepo.findAllByWalletId(walletRepo.customerWalletDetailsByCId(currUserSession.getUserId()).getWalletId());
+		
+		if(bankAccounts == null) {
+			
+			throw new BankAccountException("No Bank Account exist");
+		}
+		
+		return bankAccounts;
 	}
 
 }
