@@ -15,7 +15,7 @@ import com.mywallet.service.WalletService;
 
 
 @RestController
-public class CustomerWalletController {
+public class WalletController {
 	
 	@Autowired
 	public WalletService walletService;
