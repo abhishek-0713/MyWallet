@@ -30,9 +30,6 @@ public class Wallet {
 	@JoinColumn(name = "customer_Id")
 	private Customer customer;
 	
-	
-//	@OneToMany(cascade = CascadeType.PERSIST)
-//	@JoinColumn(name = "mobileNumber")
-//	private Beneficiary beneficiary;
+
 	
 }
