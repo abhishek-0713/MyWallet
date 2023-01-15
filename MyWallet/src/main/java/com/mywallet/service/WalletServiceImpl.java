@@ -6,7 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mywallet.exceptions.BankAccountException;
 import com.mywallet.exceptions.CustomerException;
+import com.mywallet.exceptions.TransactionException;
+import com.mywallet.exceptions.WalletException;
 import com.mywallet.model.Customer;
 import com.mywallet.model.Wallet;
 import com.mywallet.repository.CurrentSessionRepo;
@@ -47,6 +50,44 @@ public class WalletServiceImpl implements WalletService {
 		}		
 		throw new CustomerException("Duplicate Mobile Number [ Already Registered with different customer ] ");
 	
+	}
+
+
+	@Override
+	public BigDecimal showBalance(String mobile, String key) throws CustomerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String fundTransfer(String name, String targetMobileNumber, BigDecimal amount, String key)
+			throws WalletException, TransactionException, CustomerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String depositAmount(BigDecimal amount, Integer accountNo, String key)
+			throws BankAccountException, WalletException, CustomerException, TransactionException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Customer updateAccount(Customer customer, String key) throws CustomerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String addMoney(Wallet wallet, Integer accountNo, BigDecimal amount, String key)
+			throws WalletException, BankAccountException, CustomerException, TransactionException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
