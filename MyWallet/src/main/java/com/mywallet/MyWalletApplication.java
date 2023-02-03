@@ -10,4 +10,6 @@ public class MyWalletApplication {
 		SpringApplication.run(MyWalletApplication.class, args);
 	}
 
+
+
 }
