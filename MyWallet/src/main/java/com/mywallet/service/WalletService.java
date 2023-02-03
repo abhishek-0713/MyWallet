@@ -8,8 +8,6 @@ import com.mywallet.model.Customer;
 import com.mywallet.model.Wallet;
 
 import java.math.BigDecimal;
-import java.util.List;
-
 
 public interface WalletService {
 

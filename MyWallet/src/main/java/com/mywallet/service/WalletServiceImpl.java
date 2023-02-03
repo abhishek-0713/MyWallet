@@ -1,11 +1,7 @@
 package com.mywallet.service;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-
 import com.mywallet.exceptions.BankAccountException;
+import com.mywallet.exceptions.CustomerException;
 import com.mywallet.exceptions.TransactionException;
 import com.mywallet.exceptions.WalletException;
 import com.mywallet.model.*;
@@ -13,7 +9,10 @@ import com.mywallet.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mywallet.exceptions.CustomerException;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class WalletServiceImpl implements WalletService {
@@ -255,6 +254,5 @@ public class WalletServiceImpl implements WalletService {
 		return "Your bank account no "+ accountNo +" debited for "+ amount +" Rs" ;
 
 	}
-
 
 }
