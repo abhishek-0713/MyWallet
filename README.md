@@ -55,15 +55,17 @@ This is restful service for the payment wallet application with all neccessary A
 
 </br>
 
-## Tech Stack 
+## Tech Stack
 
 - Advance Java
 
-- Spring Boot 
+- AWS
 
-- Spring Validation
+- Spring Boot
 
 - MySQL
+
+- Hibernate
 
 - Maven
 
