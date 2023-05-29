@@ -21,7 +21,7 @@ This is restful service for the payment wallet application with all neccessary A
  - Musavvir Shaikh  |  [Github](https://github.com/shaikh9560)  <!-- :  Created Bank Acccount Service Layer and implementation of account related services. -->
 </br>
 
- - Abhishek D. Patil |  [Github](https://github.com/abhishek-0713) -   Team Lead <!-- Resplonsible for building overall working flow of application. Implemented User Service Layer, validate login service layer. Bug Fixes, Handling Console Errors, All Exceptions Handling. -->
+ - Abhishek D. Patil |  [Github](https://github.com/abhishek-0713)  <!-- Resplonsible for building overall working flow of application. Implemented User Service Layer, validate login service layer. Bug Fixes, Handling Console Errors, All Exceptions Handling. -->
 
                      
 
